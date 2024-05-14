@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/pet")
@@ -28,6 +31,17 @@ public class PetController {
     public ResponseEntity<PetDto> getPet(@PathVariable("id") Long id) {
         log.debug("Start get pet {}", id);
         final var output = petFacade.getPet(id);
+        log.debug("Get pet {}", output);
+        return ResponseEntity.ok(output);
+    }
+
+    @GetMapping
+    public ResponseEntity<Collection<PetDto>> getPets(@RequestParam Collection<Long> ids){
+        log.debug("Start get pet {}", ids);
+        if (ids.isEmpty()){
+            return ResponseEntity.ok(null);
+        }
+        final var output = petFacade.getPets(ids);
         log.debug("Get pet {}", output);
         return ResponseEntity.ok(output);
     }

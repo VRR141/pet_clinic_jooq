@@ -98,6 +98,15 @@ public class PetJooqRepository implements PetRepository {
         return map(petRecord);
     }
 
+    @Override
+    public Collection<PlainPet> getByIdentifiers(Collection<Long> identifiers) {
+        var records = dslContext.select()
+                .from(Tables.PET)
+                .where(Pet.PET.ID.in(identifiers))
+                .fetchInto(PetRecord.class);
+        return records.stream().map(this::map).toList();
+    }
+
     private PetRecord map(PlainPet pet) {
         return new PetRecord(pet.getId(),
                 pet.getName(),

@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.Objects;
 
 @Component
@@ -42,5 +43,11 @@ public class PetServiceImpl implements PetService {
         }
 
         return repository.update(persisted);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Collection<PlainPet> getPetsByIdentifiers(Collection<Long> ids) {
+        return repository.getByIdentifiers(ids);
     }
 }

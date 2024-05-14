@@ -9,17 +9,8 @@ import java.util.Optional;
 
 public interface PetRepository {
 
-    //    @Query("""
-//            FROM Pet pet
-//            LEFT JOIN FETCH pet.visits
-//            WHERE pet.id = :id
-//            """)
     Optional<PlainPet> findByIdWithFetchedVisits(Long id);
 
-    //    @Query("""
-//            FROM Pet pet
-//            WHERE pet.id = :id
-//            """)
     Optional<PlainPet> findById(Long id);
 
     PlainPet save(PlainPet plainPet);
@@ -27,4 +18,6 @@ public interface PetRepository {
     List<PlainPet> saveAll(Collection<PlainPet> pets);
 
     PlainPet update(PlainPet plainPet);
+
+    Collection<PlainPet> getByIdentifiers(Collection<Long> identifiers);
 }
