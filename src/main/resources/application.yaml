@@ -16,9 +16,18 @@ server:
   servlet:
     context-path: /api/clinic/v1
 
-logging:
-  level:
-    org:
-      jooq:
-        tools:
-          LoggerListener: DEBUG
+management:
+  server:
+    port: 8901
+  endpoints:
+    web:
+      exposure:
+        include: health, prometheus
+  metrics:
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true
+  prometheus:
+    metrics:
+      export:
+        enabled: true
