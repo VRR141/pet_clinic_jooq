@@ -22,4 +22,5 @@ public class PetDto {
     private String name;
     private LocalDate birthDate;
     private List<VisitDto> visits;
+    private byte[] payload;
 }

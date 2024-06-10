@@ -108,10 +108,12 @@ public class PetJooqRepository implements PetRepository {
     }
 
     private PetRecord map(PlainPet pet) {
-        return new PetRecord(pet.getId(),
+        return new PetRecord(
+                pet.getId(),
                 pet.getName(),
                 pet.getBirthDate(),
-                pet.getOwner().getId());
+                pet.getOwner().getId(),
+                pet.getPayload());
     }
 
     private PlainPet map(PetRecord record) {
@@ -125,6 +127,7 @@ public class PetJooqRepository implements PetRepository {
                 .owner(PlainOwner.builder()
                         .id(record.getOwnerId())
                         .build())
+                .payload(record.getPayload())
                 .build();
     }
 }

@@ -32,10 +32,9 @@ public class VisitJooqRepository implements VisitRepository {
     @Override
     @Transactional
     public PlainVisit save(PlainVisit plainVisit) {
+        var rec = map(plainVisit);
         var visit = dslContext.insertInto(Tables.VISIT)
-                .set(Visit.VISIT.VISIT_TIMESTAMP, plainVisit.getVisitTimestamp())
-                .set(Visit.VISIT.PET_ID, plainVisit.getPet().getId())
-                .set(Visit.VISIT.DESCRIPTION, plainVisit.getDescription())
+                .set(rec)
                 .returning(Visit.VISIT.ID)
                 .fetchOne();
         var visitId = visit.getId();
@@ -44,11 +43,22 @@ public class VisitJooqRepository implements VisitRepository {
 
     }
 
+    private VisitRecord map(PlainVisit en){
+        return new VisitRecord(
+                en.getId(),
+                en.getVisitTimestamp(),
+                en.getDescription(),
+                en.getPet().getId(),
+                en.getPayload()
+        );
+    }
+
     private PlainVisit map(VisitRecord record) {
         return PlainVisit.builder()
                 .id(record.getId())
                 .description(record.getDescription())
                 .visitTimestamp(record.getVisitTimestamp())
+                .payload(record.getPayload())
                 .build();
     }
 }

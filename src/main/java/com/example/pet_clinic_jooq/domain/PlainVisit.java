@@ -18,4 +18,5 @@ public class PlainVisit {
     private OffsetDateTime visitTimestamp;
     private String description;
     private PlainPet pet;
+    private byte[] payload;
 }

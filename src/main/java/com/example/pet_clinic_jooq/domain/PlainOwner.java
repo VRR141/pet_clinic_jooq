@@ -20,4 +20,5 @@ public class PlainOwner {
     private String address;
     private String mobilePhone;
     private List<PlainPet> pets;
+    private byte[] payload;
 }

@@ -99,7 +99,8 @@ public class OwnerJooqRepository implements OwnerRepository {
                 entity.getName(),
                 entity.getSurname(),
                 entity.getAddress(),
-                entity.getMobilePhone());
+                entity.getMobilePhone(),
+                entity.getPayload());
     }
 
     private PlainOwner map(OwnerRecord rec) {
@@ -112,6 +113,7 @@ public class OwnerJooqRepository implements OwnerRepository {
                 .surname(rec.getSurname())
                 .address(rec.getAddress())
                 .mobilePhone(rec.getMobilePhone())
+                .payload(rec.getPayload())
                 .build();
     }
 }

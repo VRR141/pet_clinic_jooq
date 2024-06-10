@@ -17,4 +17,5 @@ public class CreateOwnerDto {
     private String surname;
     private String address;
     private String mobilePhone;
+    private byte[] payload;
 }

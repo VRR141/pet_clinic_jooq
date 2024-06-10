@@ -18,4 +18,5 @@ public class CreatePetDto {
     private String name;
     private LocalDate birthDate;
     private Long ownerId;
+    private byte[] payload;
 }

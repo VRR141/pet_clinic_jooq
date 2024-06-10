@@ -20,4 +20,5 @@ public class PlainPet {
     private LocalDate birthDate;
     private PlainOwner owner;
     private List<PlainVisit> visits;
+    private byte[] payload;
 }
